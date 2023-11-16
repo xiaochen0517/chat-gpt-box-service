@@ -8,6 +8,7 @@ public class ChatGptBoxServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ChatGptBoxServiceApplication.class, args);
+        System.out.println("------------------start success------------------");
     }
 
 }
