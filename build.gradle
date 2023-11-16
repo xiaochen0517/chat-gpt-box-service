@@ -34,6 +34,7 @@ dependencies {
     implementation 'cn.dev33:sa-token-spring-boot3-starter:1.37.0'
     implementation 'cn.dev33:sa-token-redis-jackson:1.37.0'
     implementation 'org.apache.commons:commons-pool2'
+    implementation 'cn.hutool:hutool-all:5.8.23'
     compileOnly 'org.projectlombok:lombok'
     compileOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.mysql:mysql-connector-j'
