@@ -30,8 +30,8 @@ public class UserController {
     }
 
     @PostMapping("logout")
-    public String logout() {
+    public AjaxResult logout() {
         StpUtil.logout();
-        return "登出成功";
+        return AjaxResult.success("登出成功");
     }
 }
