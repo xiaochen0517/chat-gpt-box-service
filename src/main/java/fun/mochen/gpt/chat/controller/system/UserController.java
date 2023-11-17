@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping("login")
-    public AjaxResult login(@RequestBody @Validated LoginRequestDTO loginRequestDTO) {
+    public AjaxResult<Object> login(@RequestBody @Validated LoginRequestDTO loginRequestDTO) {
         // 此处仅作模拟示例，真实项目需要从数据库中查询数据进行比对
         if ("user".equals(loginRequestDTO.getUsername()) && "user".equals(loginRequestDTO.getPassword())) {
             StpUtil.login(10001);
@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("logout")
-    public AjaxResult logout() {
+    public AjaxResult<Object> logout() {
         StpUtil.logout();
         return AjaxResult.success("登出成功");
     }
