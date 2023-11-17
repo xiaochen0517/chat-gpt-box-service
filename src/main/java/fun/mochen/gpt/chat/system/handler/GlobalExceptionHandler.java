@@ -3,6 +3,7 @@ package fun.mochen.gpt.chat.system.handler;
 import cn.dev33.satoken.exception.NotLoginException;
 import fun.mochen.gpt.chat.model.base.AjaxResult;
 import fun.mochen.gpt.chat.system.exceptions.ChatMainException;
+import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -27,9 +28,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(AjaxResult.error(HttpStatus.BAD_REQUEST.value(), "参数错误", errors), headers, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(RedisConnectionFailureException.class)
+    public ResponseEntity<AjaxResult> handleRedisConnectionFailureException(RedisConnectionFailureException e) {
+        return new ResponseEntity<>(
+                AjaxResult.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Redis连接失败"),
+                HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(NotLoginException.class)
     public ResponseEntity<AjaxResult> handleNotLoginException(NotLoginException e) {
-        return new ResponseEntity<>(AjaxResult.error(HttpStatus.UNAUTHORIZED.value(), "未登录"), HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(
+                AjaxResult.error(HttpStatus.UNAUTHORIZED.value(), "未登录"),
+                HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(ChatMainException.class)
