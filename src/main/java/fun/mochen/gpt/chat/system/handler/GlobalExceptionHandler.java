@@ -1,7 +1,6 @@
 package fun.mochen.gpt.chat.system.handler;
 
 import cn.dev33.satoken.exception.NotLoginException;
-import com.alibaba.fastjson2.JSON;
 import fun.mochen.gpt.chat.model.base.AjaxResult;
 import fun.mochen.gpt.chat.system.exceptions.ChatMainException;
 import org.springframework.http.HttpHeaders;
