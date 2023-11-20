@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
+<configuration debug="true">
 
 	<springProfile name="prod, test">
 		<!-- Define the file appender with rolling policy -->
@@ -9,16 +9,16 @@
 			</encoder>
 			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 				<!-- Define the file name pattern with directories based on year, month, and day -->
-				<fileNamePattern>logs/%d{yyyy}/%d{MM}/%d{dd}/my-application-%d{yyyy-MM-dd}.log</fileNamePattern>
+				<fileNamePattern>logs/application-%d{yyyy-MM-dd}.log</fileNamePattern>
 				<maxHistory>30</maxHistory>
 				<!-- Clean history on start -->
-				<cleanHistoryOnStart>true</cleanHistoryOnStart>
+				<cleanHistoryOnStart>false</cleanHistoryOnStart>
 			</rollingPolicy>
 		</appender>
 
 		<root level="ERROR">
-			<appender-ref ref="FILE-APPENDER" />
-			<appender-ref ref="CONSOLE-APPENDER" />
+			<appender-ref ref="FILE-APPENDER"/>
+			<appender-ref ref="CONSOLE-APPENDER"/>
 		</root>
 	</springProfile>
 
@@ -31,7 +31,7 @@
 
 	<springProfile name="dev, local">
 		<root level="DEBUG">
-			<appender-ref ref="CONSOLE-APPENDER" />
+			<appender-ref ref="CONSOLE-APPENDER"/>
 		</root>
 	</springProfile>
 

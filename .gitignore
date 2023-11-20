@@ -39,3 +39,6 @@ out/
 application-local.yml
 application-prod.yml
 application-test.yml
+
+/logs/
+.env
