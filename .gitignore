@@ -41,3 +41,4 @@ application-prod.yml
 application-test.yml
 
 /logs/
+.env
