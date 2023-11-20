@@ -5,6 +5,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 23122918Lxc
       MYSQL_DATABASE: chat_gpt_db
+    ports:
+      - 13306:3306
     volumes:
       - mysql-data:/var/lib/mysql
       - ./initdb.d:/docker-entrypoint-initdb.d
