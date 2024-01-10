@@ -4,12 +4,12 @@ services:
     build: .
     environment:
       MYSQL_URL: jdbc:mysql://mysql:3306/chat_gpt_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-      MYSQL_USERNAME: ${MYSQL_USERNAME}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: ${ENV_MYSQL_PASSWORD}
       REDIS_HOST: redis
-      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PORT: 6379
       REDIS_DATABASE: 0
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_PASSWORD: ${ENV_REDIS_PASSWORD}
       SPRING_PROFILES_ACTIVE: test
     ports:
       - 8081:8081
@@ -22,7 +22,7 @@ services:
   mysql:
     image: mysql:8.2.0
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${ENV_MYSQL_PASSWORD}
       MYSQL_DATABASE: chat_gpt_db
     ports:
       - 13306:3306
@@ -34,7 +34,7 @@ services:
 
   redis:
     image: redis:5.0.14
-    command: redis-server --requirepass ${REDIS_PASSWORD}
+    command: redis-server --requirepass ${ENV_REDIS_PASSWORD}
     ports:
       - 16379:6379
     volumes:
