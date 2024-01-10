@@ -1,13 +1,19 @@
 package fun.mochen.gpt.chat.controller.system;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.alibaba.fastjson2.JSON;
 import fun.mochen.gpt.chat.model.base.AjaxResult;
+import fun.mochen.gpt.chat.model.dos.test.TestTableDO;
 import fun.mochen.gpt.chat.model.dtos.system.LoginRequestDTO;
+import fun.mochen.gpt.chat.services.test.TestService;
 import fun.mochen.gpt.chat.system.exceptions.ChatServiceException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -17,6 +23,15 @@ public class UserController {
     @GetMapping("test")
     public String test() {
         return "hello world";
+    }
+
+    @Autowired
+    private TestService testService;
+
+    @GetMapping("test/sql")
+    public String testSql() {
+        List<TestTableDO> list = testService.list();
+        return JSON.toJSONString(list);
     }
 
     @PostMapping("login")
