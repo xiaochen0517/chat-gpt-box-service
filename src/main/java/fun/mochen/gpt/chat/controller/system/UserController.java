@@ -1,47 +1,29 @@
 package fun.mochen.gpt.chat.controller.system;
 
 import cn.dev33.satoken.stp.StpUtil;
-import com.alibaba.fastjson2.JSON;
 import fun.mochen.gpt.chat.model.base.AjaxResult;
-import fun.mochen.gpt.chat.model.dos.test.TestTableDO;
 import fun.mochen.gpt.chat.model.dtos.system.LoginRequestDTO;
-import fun.mochen.gpt.chat.services.test.TestService;
-import fun.mochen.gpt.chat.system.exceptions.ChatServiceException;
+import fun.mochen.gpt.chat.services.system.SystemUserService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-    @GetMapping("test")
-    public String test() {
-        return "hello world";
-    }
-
     @Autowired
-    private TestService testService;
-
-    @GetMapping("test/sql")
-    public String testSql() {
-        List<TestTableDO> list = testService.list();
-        return JSON.toJSONString(list);
-    }
+    private SystemUserService systemUserService;
 
     @PostMapping("login")
-    public AjaxResult<Object> login(@RequestBody @Validated LoginRequestDTO loginRequestDTO) {
-        // 此处仅作模拟示例，真实项目需要从数据库中查询数据进行比对
-        if ("user".equals(loginRequestDTO.getUsername()) && "user".equals(loginRequestDTO.getPassword())) {
-            StpUtil.login(10001);
-            return AjaxResult.success("登录成功");
-        }
-        throw new ChatServiceException(HttpStatus.UNAUTHORIZED, "用户名或密码错误");
+    public AjaxResult<Object> login(@RequestBody @Valid LoginRequestDTO loginRequestDTO) {
+        systemUserService.userLogin(loginRequestDTO);
+        return AjaxResult.success("登录成功");
     }
 
     @PostMapping("logout")

@@ -20,9 +20,6 @@ public class WebConfiguration implements WebMvcConfigurer {
     @Autowired
     private AuthInterceptor authInterceptor;
 
-    /**
-     * 添加拦截器
-     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authInterceptor)

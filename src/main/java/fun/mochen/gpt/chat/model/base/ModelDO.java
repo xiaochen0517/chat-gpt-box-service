@@ -10,13 +10,13 @@ public class ModelDO implements Serializable {
 
     private Long createUserId;
 
-    private Long createUsername;
+    private String createUsername;
 
     private Date createTime;
 
     private Long updateUserId;
 
-    private Long updateUsername;
+    private String updateUsername;
 
     private Date updateTime;
 
@@ -24,7 +24,7 @@ public class ModelDO implements Serializable {
 
     private Long deleteUserId;
 
-    private Long deleteUsername;
+    private String deleteUsername;
 
     private Date deleteTime;
 
