@@ -22,8 +22,7 @@ public class UserController {
 
     @PostMapping("login")
     public AjaxResult<Object> login(@RequestBody @Valid LoginRequestDTO loginRequestDTO) {
-        systemUserService.userLogin(loginRequestDTO);
-        return AjaxResult.success("登录成功");
+        return AjaxResult.success("登录成功", systemUserService.userLogin(loginRequestDTO));
     }
 
     @PostMapping("logout")
